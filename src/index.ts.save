@@ -1,0 +1,66 @@
+// ============================================
+// Lexxie MiaBot Main File
+// ============================================
+import "dotenv/config";
+
+import { Bot } from "grammy";
+import { config } from "./config";
+import { mainKeyboard } from "./keyboards";
+
+import { startCommand } from "./commands/start";
+import { helpCommand } from "./commands/help";
+import { ownerCommand } from "./commands/owner";
+import { botInfoCommand } from "./commands/botinfo";
+import { menuCommand } from "./commands/menu";
+import { pingCommand } from "./commands/ping";
+import { registerCallbacks } from "./callbacks";
+import { idCommand } from "./commands/id";
+import { banCommand } from "./commands/ban";
+import { kickCommand } from "./commands/kick";
+import { muteCommand } from "./commands/mute";
+import { unmuteCommand } from "./commands/unmute";
+
+
+
+
+const bot = new Bot(process.env.BOT_TOKEN || "");
+
+bot.command("start", startCommand);
+bot.command("help", helpCommand);
+bot.command("owner", ownerCommand);
+bot.command("botinfo", botInfoCommand);
+bot.command("menu", menuCommand);
+bot.command("ping", pingCommand);
+bot.command("id", idCommand);
+bot.command("ban", banCommand);
+bot.command("kick", kickCommand);
+bot.command("mute", muteCommand);
+bot.command("unmute", unmuteCommand);
+
+
+
+
+
+
+
+bot.callbackQuery("help", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  await ctx.reply("Use /help to see my commands.");
+});
+
+bot.callbackQuery("owner", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  await ctx.reply(`👑 Owner: ${config.ownerName}`);
+});
+
+bot.callbackQuery("botinfo", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  await ctx.reply(
+    `🤖 ${config.botName}\nVersion: ${config.version}`
+  );
+});
+
+registerCallbacks(bot);
+bot.catch((err) => {
+  console.error("Bot error:", err.error);
+});

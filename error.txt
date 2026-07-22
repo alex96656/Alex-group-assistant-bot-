@@ -1,0 +1,134 @@
+
+> lexxie_miabot@1.0.0 dev
+> tsx src/index.ts
+
+Lexxie MiaBot is running...
+Error in middleware while handling update 8514574 GrammyError: Call to 'answerCallbackQuery' failed! (400: Bad Request: query is too old and response timeout expired or query ID is invalid)
+    at toGrammyError (/data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/core/error.js:47:12)
+    at ApiClient.callApi (/data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/core/client.js:100:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async <anonymous> (/data/data/com.termux/files/home/lexxie_miabot/src/callbacks.ts:23:5)
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13 {
+  method: 'answerCallbackQuery',
+  payload: { callback_query_id: '498165286981736780' },
+  ok: false,
+  error_code: 400,
+  description: 'Bad Request: query is too old and response timeout expired or query ID is invalid',
+  parameters: {}
+}
+No error handler was set!
+Set your own error handler with `bot.catch = ...`
+Stopping bot
+node:internal/process/promises:324
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+GrammyError: Call to 'answerCallbackQuery' failed! (400: Bad Request: query is too old and response timeout expired or query ID is invalid)
+    at toGrammyError (/data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/core/error.js:47:12)
+    at ApiClient.callApi (/data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/core/client.js:100:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async <anonymous> (/data/data/com.termux/files/home/lexxie_miabot/src/callbacks.ts:23:5)
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+    at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13 {
+  error: GrammyError: Call to 'answerCallbackQuery' failed! (400: Bad Request: query is too old and response timeout expired or query ID is invalid)
+      at toGrammyError (/data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/core/error.js:47:12)
+      at ApiClient.callApi (/data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/core/client.js:100:48)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async <anonymous> (/data/data/com.termux/files/home/lexxie_miabot/src/callbacks.ts:23:5)
+      at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+      at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13
+      at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+      at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13
+      at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:578:13
+      at async /data/data/com.termux/files/home/lexxie_miabot/node_modules/grammy/out/composer.js:62:13 {
+    method: 'answerCallbackQuery',
+    payload: { callback_query_id: '498165286981736780' },
+    ok: false,
+    error_code: 400,
+    description: 'Bad Request: query is too old and response timeout expired or query ID is invalid',
+    parameters: {}
+  },
+  ctx: Context {
+    update: {
+      update_id: 8514574,
+      callback_query: {
+        id: '498165286981736780',
+        from: {
+          id: 8705922736,
+          is_bot: false,
+          first_name: '◤QΣ◢〖ᴹᴿ•ᴀʟᴇ᥊᭄𓋆 ⁰⁰³',
+          username: 'mr_alex_dem',
+          language_code: 'en'
+        },
+        message: {
+          message_id: 105,
+          from: {
+            id: 8755645611,
+            is_bot: true,
+            first_name: 'Lexxie new',
+            username: 'Lexxie_newbot'
+          },
+          chat: {
+            id: 8705922736,
+            first_name: '◤QΣ◢〖ᴹᴿ•ᴀʟᴇ᥊᭄𓋆 ⁰⁰³',
+            username: 'mr_alex_dem',
+            type: 'private'
+          },
+          date: 1784042887,
+          text: '🖥️ Lexxie MiaBot\n' +
+            '\n' +
+            '╭━━━〔 SYSTEM ONLINE 〕━━━╮\n' +
+            '┃ ⚡ Status: Online\n' +
+            '┃ 🤖 Version: 1.0.0\n' +
+            '┃ 👑 Owner: Alex\n' +
+            '╰━━━━━━━━━━━━━━━━━━━━━━╯\n' +
+            '\n' +
+            'Welcome to the control menu.\n' +
+            '\n' +
+            'Choose an option below 👇',
+          reply_markup: { inline_keyboard: [Array] }
+        },
+        chat_instance: '-4885950383184927731',
+        data: 'tools'
+      }
+    },
+    api: Api {
+      token: '8755645611:AAFBBu0isJvX4m0TF58AfTbXwv4tEAy_TvE',
+      options: undefined,
+      raw: Proxy({}),
+      config: {
+        use: [Function: use],
+        installedTransformers: [Function: installedTransformers]
+      }
+    },
+    me: {
+      id: 8755645611,
+      is_bot: true,
+      first_name: 'Lexxie new',
+      username: 'Lexxie_newbot',
+      can_join_groups: true,
+      can_read_all_group_messages: false,
+      supports_inline_queries: false,
+      supports_guest_queries: false,
+      can_connect_to_business: false,
+      has_main_web_app: false,
+      has_topics_enabled: false,
+      allows_users_to_create_topics: false,
+      can_manage_bots: false,
+      supports_join_request_queries: false
+    },
+    match: 'tools'
+  },
+  name: 'BotError'
+}
+
+Node.js v26.4.0
