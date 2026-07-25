@@ -76,7 +76,7 @@ import { workCommand } from "./commands/work";
 import { mineCommand } from "./commands/mine";
 import { fishCommand } from "./commands/fish";
 import { slotsCommand } from "./commands/slots";
-
+import { giveAllCommand } from "./commands/giveall";
 
 
 
@@ -154,7 +154,7 @@ bot.command("work", workCommand);
 bot.command("mine", mineCommand);
 bot.command("fish", fishCommand);
 bot.command("slots", slotsCommand);
-
+bot.command("giveall", giveAllCommand);
 
 
 
