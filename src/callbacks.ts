@@ -341,4 +341,39 @@ Online`,
     } catch {}
   });
 
+
+
+bot.callbackQuery("games", async (ctx) => {
+  await ctx.answerCallbackQuery();
+
+  await ctx.editMessageText(
+`🎮 <b>Lexxie MiaBot Games</b>
+
+🎰 /slots <amount> - Slot Machine
+🪙 /coinflip <amount> - Coin Flip
+🎲 /dice - Roll Dice
+🃏 /blackjack <amount> - Blackjack (Coming Soon)
+
+💼 Economy
+
+💼 /work
+⛏ /mine
+🎣 /fish
+🥷 /rob
+🎁 /daily
+🎁 /bonus
+
+🛒 Shop
+
+🛍 /shop
+💳 /buy
+🎒 /inv
+💸 /sell`,
+    {
+      parse_mode: "HTML",
+      reply_markup: backKeyboard(),
+    }
+  );
+});
+
 }

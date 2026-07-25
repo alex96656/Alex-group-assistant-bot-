@@ -59,6 +59,24 @@ import { dashboardCommand } from "./commands/dashboard";
 import { backupCommand } from "./commands/backup";
 import { reportCommand } from "./commands/report";
 import { usersCommand } from "./commands/users";
+import { balanceCommand } from "./commands/balance";
+import { dailyCommand } from "./commands/daily";
+import { profileCommand } from "./commands/profile";
+import { leaderboardCommand } from "./commands/leaderboard";
+import { depositCommand } from "./commands/deposit";
+import { withdrawCommand } from "./commands/withdraw";
+import { transferCommand } from "./commands/transfer";
+import { shopCommand } from "./commands/shop";
+import { buyCommand } from "./commands/buy";
+import { invCommand } from "./commands/inv";
+import { sellCommand } from "./commands/sell";
+import { bonusCommand } from "./commands/bonus";
+import { robCommand } from "./commands/rob";
+import { workCommand } from "./commands/work";
+import { mineCommand } from "./commands/mine";
+import { fishCommand } from "./commands/fish";
+import { slotsCommand } from "./commands/slots";
+
 
 
 
@@ -116,9 +134,26 @@ bot.command("profile", profileCommand);
 bot.command("dashboard", dashboardCommand);
 bot.command("backup", backupCommand);
 bot.command("users", usersCommand);
-
-
-
+bot.command("balance", balanceCommand);
+bot.command("bal", balanceCommand);
+bot.command("daily", dailyCommand);
+bot.command("profile", profileCommand);
+bot.command("p", profileCommand);
+bot.command("leaderboard", leaderboardCommand);
+bot.command("lb", leaderboardCommand);
+bot.command("deposit", depositCommand);
+bot.command("withdraw", withdrawCommand);
+bot.command("transfer", transferCommand);
+bot.command("shop", shopCommand);
+bot.command("buy", buyCommand);
+bot.command("inv", invCommand);
+bot.command("sell", sellCommand);
+bot.command("bonus", bonusCommand);
+bot.command("rob", robCommand);
+bot.command("work", workCommand);
+bot.command("mine", mineCommand);
+bot.command("fish", fishCommand);
+bot.command("slots", slotsCommand);
 
 
 

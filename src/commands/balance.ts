@@ -1,34 +1,26 @@
 // ============================================
-// Lexxie MiaBot Economy Profile
+// Lexxie MiaBot Balance Command
 // ============================================
 
 import { Context } from "grammy";
 import { getEconomy } from "../economy/economy";
 
-export async function profileCommand(ctx: Context) {
+export async function balanceCommand(ctx: Context) {
   if (!ctx.from) return;
 
   const user = getEconomy(ctx.from.id.toString());
 
-  const total = user.balance + user.bank;
-
   await ctx.reply(
-`👤 <b>${ctx.from.first_name}'s Profile</b>
+`💰 <b>Lex Coins Wallet</b>
 
-🆔 <code>${ctx.from.id}</code>
+👤 ${ctx.from.first_name}
 
 🪙 Wallet: <b>${user.balance.toLocaleString()} Lex Coins</b>
 🏦 Bank: <b>${user.bank.toLocaleString()} Lex Coins</b>
 
-💎 Total Wealth: <b>${total.toLocaleString()} Lex Coins</b>
-
-⭐ Level: <b>${user.level}</b>
-✨ XP: <b>${user.xp}</b>
-
-📝 Bio:
-${user.bio || "No bio set."}`,
+💎 Total Wealth: <b>${(user.balance + user.bank).toLocaleString()} Lex Coins</b>`,
     {
-      parse_mode: "HTML",
+      parse_mode: "HTML"
     }
   );
 }
