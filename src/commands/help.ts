@@ -75,6 +75,37 @@ export async function helpCommand(ctx: Context) {
 👋 /welcome off
 👋 /resetwelcome
 
+
+━━━━━━━━━━━━━━━━━━━━
+<b>💰 ECONOMY COMMANDS</b>
+
+💳 /balance - Check your wallet balance
+💼 /work - Work to earn Lex Coins
+⛏️ /mine - Mine for valuable resources
+🎣 /fish - Catch fish and earn rewards
+🥷 /rob - Attempt to rob another user
+
+🎁 /daily - Claim your daily reward
+🎉 /bonus - Claim your bonus reward
+
+🏦 /deposit - Deposit coins into the bank
+💸 /withdraw - Withdraw coins from the bank
+💵 /transfer - Send coins to another user
+
+━━━━━━━━━━━━━━━━━━━━
+<b>🛒 SHOP COMMANDS</b>
+
+🛍️ /shop - View the item shop
+💳 /buy - Purchase an item
+🎒 /inv - View your inventory
+💸 /sell - Sell an owned item
+
+━━━━━━━━━━━━━━━━━━━━
+<b>🏆 LEADERBOARD</b>
+
+👑 /leaderboard - View the richest players
+
+
 💡 Reply to a user's message when using moderation commands.
 
 ━━━━━━━━━━━━━━━━━━━━
