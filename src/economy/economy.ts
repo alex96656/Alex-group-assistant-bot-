@@ -7,6 +7,10 @@ import { getDatabase, saveDatabase } from "../database/database";
 export function getEconomy(userId: string) {
   const db = getDatabase();
 
+
+  console.log(db);
+
+
   if (!db.economy) db.economy = {};
 
   if (!db.economy[userId]) {

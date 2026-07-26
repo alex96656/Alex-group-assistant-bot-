@@ -77,6 +77,13 @@ import { mineCommand } from "./commands/mine";
 import { fishCommand } from "./commands/fish";
 import { slotsCommand } from "./commands/slots";
 import { giveAllCommand } from "./commands/giveall";
+import { forceJoin } from "./middleware/forceJoin";
+import { giftCodeCommand } from "./commands/giftcode";
+import { redeemCommand } from "./commands/redeem";
+
+
+
+
 
 
 
@@ -155,6 +162,13 @@ bot.command("mine", mineCommand);
 bot.command("fish", fishCommand);
 bot.command("slots", slotsCommand);
 bot.command("giveall", giveAllCommand);
+bot.command("giftcode", giftCodeCommand);
+bot.command("redeem", redeemCommand);
+
+
+
+
+
 
 
 
