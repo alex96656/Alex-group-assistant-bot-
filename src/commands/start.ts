@@ -37,7 +37,7 @@ I'm your smart Telegram assistant.
 
 ━━━━━━━━━━━━━━━━━━━━
 
-📚 Use <code>/help</code> to see all available commands.
+📚 Use /help to see all available commands.
 
 💙 Thank you for choosing <b>${config.botName}</b>.`,
     {
