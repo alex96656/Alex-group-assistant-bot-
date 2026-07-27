@@ -12,7 +12,7 @@ if (!fs.existsSync(dbPath)) {
     dbPath,
     JSON.stringify(
   {
-  users: [],
+  users: {},
   warnings: [],
   welcomes: {},
   warnLimits: {},

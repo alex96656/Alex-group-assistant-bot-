@@ -81,7 +81,7 @@ import { giftCodeCommand } from "./commands/giftcode";
 import { redeemCommand } from "./commands/redeem";
 import { texClanCommand } from "./commands/texclan";
 import { clanHistoryCommand } from "./commands/clanhistory";
-
+import { profileCommand } from "./commands/profile";
 
 
 
@@ -161,7 +161,8 @@ bot.command("giftcode", giftCodeCommand);
 bot.command("redeem", redeemCommand);
 bot.command("texclan", texClanCommand);
 bot.command("clanhistory", clanHistoryCommand);
-
+bot.command("profile", profileCommand);
+bot.command("p", profileCommand);
 
 
 
