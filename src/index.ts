@@ -9,6 +9,7 @@ import { mainKeyboard } from "./keyboards";
 
 import { startCommand } from "./commands/start";
 import { helpCommand } from "./commands/help";
+import { forceJoin } from "./middleware/forceJoin";
 import { ownerCommand } from "./commands/owner";
 import { botInfoCommand } from "./commands/botinfo";
 import { menuCommand } from "./commands/menu";
@@ -80,7 +81,6 @@ import { giftCodeCommand } from "./commands/giftcode";
 import { redeemCommand } from "./commands/redeem";
 import { texClanCommand } from "./commands/texclan";
 import { clanHistoryCommand } from "./commands/clanhistory";
-
 
 
 
@@ -165,7 +165,22 @@ bot.command("clanhistory", clanHistoryCommand);
 
 
 
+bot.callbackQuery("check_join", async (ctx) => {
+  const joined = await forceJoin(ctx);
 
+  if (joined) {
+    await ctx.answerCallbackQuery({
+      text: "✅ Verification successful!",
+    });
+
+    await startCommand(ctx);
+  } else {
+    await ctx.answerCallbackQuery({
+      text: "❌ Please join all required channels first.",
+      show_alert: true,
+    });
+  }
+});
 
 
 

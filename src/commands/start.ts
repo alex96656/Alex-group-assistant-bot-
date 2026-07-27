@@ -5,25 +5,41 @@
 import { Context } from "grammy";
 import { config } from "../config";
 import { mainKeyboard } from "../keyboards";
+import { forceJoin } from "../middleware/forceJoin";
 
 export async function startCommand(ctx: Context) {
+  // Check if user has joined required channels/groups
+  const joined = await forceJoin(ctx);
+
+  if (!joined) {
+    return;
+  }
+
   await ctx.reply(
 `🤖 <b>Welcome to ${config.botName}!</b>
 
-👋 Hello ${ctx.from?.first_name || "User"}!
+👋 Hello <b>${ctx.from?.first_name || "User"}</b>!
 
 I'm your smart Telegram assistant.
 
-📦 <b>24+ Commands</b>
-⚡ <b>Fast & Reliable</b>
-🛡️ <b>Moderation Tools</b>
-🎉 <b>Fun Commands</b>
-📝 <b>Notes System</b>
+✨ <b>What I Can Do</b>
+
+🛡️ Advanced Group Moderation
+💰 Complete Economy System
+🎮 Fun & Mini Games
+📝 Notes & Welcome System
+⚠️ Warning & Anti-Link Protection
+🎁 Gift Codes & Rewards
+🏆 Leaderboards
+👥 User Management
+📖 TEX Clan Commands
+⚡ Fast • Secure • Reliable
 
 ━━━━━━━━━━━━━━━━━━━━
 
-📚 Use /help to view all commands.
-⚙️ Use the buttons below to explore.`,
+📚 Use <code>/help</code> to see all available commands.
+
+💙 Thank you for choosing <b>${config.botName}</b>.`,
     {
       parse_mode: "HTML",
       reply_markup: mainKeyboard(),
