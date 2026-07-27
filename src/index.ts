@@ -54,14 +54,12 @@ import { unpinCommand } from "./commands/unpin";
 import { adminsCommand } from "./commands/admins";
 import { delCommand } from "./commands/del";
 import { purgeCommand } from "./commands/purge";
-import { profileCommand } from "./commands/profile";
 import { dashboardCommand } from "./commands/dashboard";
 import { backupCommand } from "./commands/backup";
 import { reportCommand } from "./commands/report";
 import { usersCommand } from "./commands/users";
 import { balanceCommand } from "./commands/balance";
 import { dailyCommand } from "./commands/daily";
-import { profileCommand } from "./commands/profile";
 import { leaderboardCommand } from "./commands/leaderboard";
 import { depositCommand } from "./commands/deposit";
 import { withdrawCommand } from "./commands/withdraw";
@@ -80,7 +78,7 @@ import { giveAllCommand } from "./commands/giveall";
 import { forceJoin } from "./middleware/forceJoin";
 import { giftCodeCommand } from "./commands/giftcode";
 import { redeemCommand } from "./commands/redeem";
-
+import { texClanCommand } from "./commands/texclan";
 
 
 
@@ -137,15 +135,12 @@ bot.command("unpin", unpinCommand);
 bot.command("admins", adminsCommand);
 bot.command("del", delCommand);
 bot.command("purge", purgeCommand);
-bot.command("profile", profileCommand);
 bot.command("dashboard", dashboardCommand);
 bot.command("backup", backupCommand);
 bot.command("users", usersCommand);
 bot.command("balance", balanceCommand);
 bot.command("bal", balanceCommand);
 bot.command("daily", dailyCommand);
-bot.command("profile", profileCommand);
-bot.command("p", profileCommand);
 bot.command("leaderboard", leaderboardCommand);
 bot.command("lb", leaderboardCommand);
 bot.command("deposit", depositCommand);
@@ -164,7 +159,7 @@ bot.command("slots", slotsCommand);
 bot.command("giveall", giveAllCommand);
 bot.command("giftcode", giftCodeCommand);
 bot.command("redeem", redeemCommand);
-
+bot.command("texclan", texClanCommand);
 
 
 
