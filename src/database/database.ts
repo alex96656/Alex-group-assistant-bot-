@@ -11,17 +11,18 @@ if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(
     dbPath,
     JSON.stringify(
-  {
-  users: {},
-  warnings: [],
-  welcomes: {},
-  warnLimits: {},
-  antiLinks: {},
-  logChats: {}
-},
-  null,
-  2
-)
+      {
+        users: [],
+        profiles: {},
+        warnings: [],
+        welcomes: {},
+        warnLimits: {},
+        antiLinks: {},
+        logChats: {}
+      },
+      null,
+      2
+    )
   );
 }
 

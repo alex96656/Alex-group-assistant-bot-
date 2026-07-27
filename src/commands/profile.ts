@@ -1,32 +1,34 @@
 import { Context } from "grammy";
-import { getEconomy } from "../economy/economy";
 import { getDatabase, saveDatabase } from "../database/database";
+import { getEconomy } from "../economy/economy";
 
 export async function profileCommand(ctx: Context) {
   if (!ctx.from) return;
 
   const db = getDatabase();
 
-  if (!db.users) db.users = {};
+  if (!db.profiles) db.profiles = {};
 
-  if (!db.users[ctx.from.id]) {
-    db.users[ctx.from.id] = {
-      joinedAt: new Date().toISOString(),
+  const id = String(ctx.from.id);
+
+  if (!db.profiles[id]) {
+    db.profiles[id] = {
+      joinedAt: Date.now(),
       badges: []
     };
 
     saveDatabase(db);
   }
 
-  const eco = getEconomy(String(ctx.from.id));
-  const user = db.users[ctx.from.id];
+  const profile = db.profiles[id];
+  const eco = getEconomy(id);
 
-  const joined = new Date(user.joinedAt).toLocaleDateString();
+  const joined = new Date(profile.joinedAt).toLocaleDateString();
 
   await ctx.reply(
 `👤 <b>${ctx.from.first_name}</b>
 
-🆔 <code>${ctx.from.id}</code>
+🆔 ID: <code>${id}</code>
 
 💰 Wallet: <b>${eco.balance.toLocaleString()}</b> Lex Coins
 🏦 Bank: <b>${eco.bank.toLocaleString()}</b> Lex Coins
@@ -35,15 +37,15 @@ export async function profileCommand(ctx: Context) {
 ✨ XP: <b>${eco.xp}</b>
 
 🎖️ Badges:
-${user.badges.length ? user.badges.join(" ") : "None"}
+${profile.badges.length ? profile.badges.join(" ") : "None"}
 
 📅 Joined:
 <b>${joined}</b>
 
-━━━━━━━━━━━━━━
-🤖 Powered by <b>Lexxie MiaBot</b>`,
+━━━━━━━━━━━━━━━━━━
+🤖 <b>Powered by Lexxie MiaBot</b>`,
     {
-      parse_mode: "HTML"
+      parse_mode: "HTML",
     }
   );
 }
