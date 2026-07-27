@@ -79,7 +79,7 @@ import { forceJoin } from "./middleware/forceJoin";
 import { giftCodeCommand } from "./commands/giftcode";
 import { redeemCommand } from "./commands/redeem";
 import { texClanCommand } from "./commands/texclan";
-
+import { clanHistoryCommand } from "./commands/clanhistory";
 
 
 
@@ -160,7 +160,7 @@ bot.command("giveall", giveAllCommand);
 bot.command("giftcode", giftCodeCommand);
 bot.command("redeem", redeemCommand);
 bot.command("texclan", texClanCommand);
-
+bot.command("clanhistory", clanHistoryCommand);
 
 
 
