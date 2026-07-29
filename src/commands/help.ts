@@ -91,7 +91,8 @@ export async function helpCommand(ctx: Context) {
 🏦 /deposit - Deposit coins into the bank
 💸 /withdraw - Withdraw coins from the bank
 💵 /transfer - Send coins to another user
-
+🏆 /achievements - View your achievements
+🏆 /ach - Shortcut for achievements
 ━━━━━━━━━━━━━━━━━━━━
 <b>🛒 SHOP COMMANDS</b>
 
