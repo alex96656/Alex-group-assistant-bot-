@@ -14,6 +14,7 @@ if (!fs.existsSync(dbPath)) {
       {
         users: [],
         profiles: {},
+        achievements: {},
         warnings: [],
         welcomes: {},
         warnLimits: {},

@@ -82,7 +82,7 @@ import { redeemCommand } from "./commands/redeem";
 import { texClanCommand } from "./commands/texclan";
 import { clanHistoryCommand } from "./commands/clanhistory";
 import { profileCommand } from "./commands/profile";
-
+import { achievementsCommand } from "./commands/achievements";
 
 
 
@@ -163,6 +163,15 @@ bot.command("texclan", texClanCommand);
 bot.command("clanhistory", clanHistoryCommand);
 bot.command("profile", profileCommand);
 bot.command("p", profileCommand);
+bot.command("achievements", achievementsCommand);
+bot.command("ach", achievementsCommand);
+
+
+
+
+
+
+
 
 
 
