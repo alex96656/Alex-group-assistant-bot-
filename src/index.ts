@@ -83,6 +83,15 @@ import { texClanCommand } from "./commands/texclan";
 import { clanHistoryCommand } from "./commands/clanhistory";
 import { profileCommand } from "./commands/profile";
 import { achievementsCommand } from "./commands/achievements";
+import { bioCommand } from "./commands/bio";
+import { setNickCommand } from "./commands/setnick";
+import { rankCommand } from "./commands/rank";
+import { begCommand } from "./commands/beg";
+
+
+
+
+
 
 
 
@@ -165,10 +174,10 @@ bot.command("profile", profileCommand);
 bot.command("p", profileCommand);
 bot.command("achievements", achievementsCommand);
 bot.command("ach", achievementsCommand);
-
-
-
-
+bot.command("bio", bioCommand);
+bot.command("setnick", setNickCommand);
+bot.command("rank", rankCommand);
+bot.command("beg", begCommand);
 
 
 

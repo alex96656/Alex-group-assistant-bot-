@@ -26,7 +26,7 @@ export async function profileCommand(ctx: Context) {
   const joined = new Date(profile.joinedAt).toLocaleDateString();
 
   await ctx.reply(
-`👤 <b>${ctx.from.first_name}</b>
+`👤 <b>${eco.nickname || ctx.from.first_name}</b>
 
 🆔 ID: <code>${id}</code>
 
@@ -36,13 +36,16 @@ export async function profileCommand(ctx: Context) {
 ⭐ Level: <b>${eco.level}</b>
 ✨ XP: <b>${eco.xp}</b>
 
+📝 Bio:
+<b>${eco.bio || "No bio set."}</b>
+
 🎖️ Badges:
 ${profile.badges.length ? profile.badges.join(" ") : "None"}
 
 📅 Joined:
 <b>${joined}</b>
 
-━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━
 🤖 <b>Powered by Lexxie MiaBot</b>`,
     {
       parse_mode: "HTML",

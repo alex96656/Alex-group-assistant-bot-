@@ -34,7 +34,9 @@ export async function helpCommand(ctx: Context) {
 /calc &lt;expression&gt; - Calculator
 /note save &lt;name&gt; &lt;text&gt; - Save a note
 /note get &lt;name&gt; - Get a saved note
-
+/setnick - Set your profile nickname
+/bio - Set your profile bio
+/profile - View your profile
 ━━━━━━━━━━━━━━━━━━━━
 <b>🎉 FUN COMMANDS</b>
 
@@ -93,6 +95,7 @@ export async function helpCommand(ctx: Context) {
 💵 /transfer - Send coins to another user
 🏆 /achievements - View your achievements
 🏆 /ach - Shortcut for achievements
+🥇/rank - View your rank
 ━━━━━━━━━━━━━━━━━━━━
 <b>🛒 SHOP COMMANDS</b>
 
