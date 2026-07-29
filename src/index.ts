@@ -114,7 +114,7 @@ bot.command("uptime", uptimeCommand);
 bot.command("stats", statsCommand);
 bot.command("whois", whoisCommand);
 bot.use(saveUser);
-// bot.use(aiChat);
+bot.use(aiChat);
 bot.command("broadcast", broadcastCommand);
 bot.command("server", serverCommand);
 bot.command("userinfo", userinfoCommand);
