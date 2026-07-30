@@ -2,6 +2,7 @@
 // Lexxie MiaBot Main File
 // ============================================
 import "dotenv/config";
+console.log("OpenRouter Key:", process.env.OPENROUTER_API_KEY ? "Loaded ✅" : "Missing ❌");
 
 import { Bot } from "grammy";
 import { config } from "./config";

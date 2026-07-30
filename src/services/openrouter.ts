@@ -29,9 +29,20 @@ export async function askAI(prompt: string): Promise<string> {
       }
     );
 
-    return response.data.choices?.[0]?.message?.content || "No response from AI.";
+    return (
+      response.data.choices?.[0]?.message?.content ||
+      "No response from AI."
+    );
   } catch (error: any) {
-    console.error("OpenRouter Error:", error.response?.data || error.message);
-    return "❌ AI is currently unavailable.";
+    console.error(
+      "OpenRouter Error:",
+      error.response?.data || error.message
+    );
+
+    return `❌ ${
+      error.response?.data?.error?.message ||
+      error.message ||
+      "Unknown OpenRouter error"
+    }`;
   }
 }
