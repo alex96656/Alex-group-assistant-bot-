@@ -6,19 +6,40 @@ export async function achievementsCommand(ctx: Context) {
 
   const ach = getAchievements(String(ctx.from.id));
 
+  const list = [
+    ["firstSteps", "🥇", "First Steps"],
+    ["richGuy", "💰", "Rich Guy"],
+    ["banker", "🏦", "Banker"],
+    ["hardWorker", "💼", "Hard Worker"],
+    ["miner", "⛏️", "Master Miner"],
+    ["fisherman", "🎣", "Master Fisher"],
+    ["luckyOne", "🎁", "Lucky One"],
+    ["levelMaster", "⭐", "Level Master"],
+    ["millionaire", "💎", "Millionaire"],
+    ["veteran", "🏆", "Veteran"],
+    ["activeUser", "🔥", "Active User"],
+  ] as const;
+
+  const unlocked = list.filter(([key]) => ach[key]).length;
+
+  const text = list
+    .map(
+      ([key, emoji, name]) =>
+        `${ach[key] ? "✅" : "🔒"} ${emoji} <b>${name}</b>`
+    )
+    .join("\n");
+
   await ctx.reply(
-`🏆 <b>Achievements</b>
+    `🏆 <b>ACHIEVEMENTS</b>
 
-${ach.firstSteps ? "✅" : "❌"} 🥇 First Steps
-${ach.richGuy ? "✅" : "❌"} 💰 Rich Guy
-${ach.banker ? "✅" : "❌"} 🏦 Banker
-${ach.hardWorker ? "✅" : "❌"} 💼 Hard Worker
-${ach.miner ? "✅" : "❌"} ⛏️ Master Miner
-${ach.fisherman ? "✅" : "❌"} 🎣 Master Fisher
-${ach.luckyOne ? "✅" : "❌"} 🎁 Lucky One
+👤 <b>${ctx.from.first_name}</b>
 
-━━━━━━━━━━━━━━
-🤖 <b>Powered by Lexxie MiaBot</b>`,
+${text}
+
+━━━━━━━━━━━━━━━━━━
+🎖️ Unlocked: <b>${unlocked}/${list.length}</b>
+
+Keep playing and using the bot to unlock more! 🚀`,
     {
       parse_mode: "HTML",
     }
