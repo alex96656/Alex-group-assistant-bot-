@@ -22,8 +22,14 @@ export async function aiChat(ctx: Context, next: NextFunction) {
 
   try {
 
-    const isOwner =
-  ctx.from?.id === Number(process.env.OWNER_ID);
+    const ownerId = Number(process.env.OWNER_ID);
+const senderId = ctx.from?.id;
+
+const isOwner = senderId === ownerId;
+
+console.log("Sender ID:", senderId);
+console.log("Owner ID:", ownerId);
+console.log("Is Owner:", isOwner);
 
 const reply = await askAI(message, isOwner);
 
