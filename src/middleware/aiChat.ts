@@ -22,7 +22,10 @@ export async function aiChat(ctx: Context, next: NextFunction) {
 
   try {
 
-    const reply = await askAI(message);
+    const isOwner =
+  ctx.from?.id === Number(process.env.OWNER_ID);
+
+const reply = await askAI(message, isOwner);
 
     await ctx.reply(reply, {
       reply_parameters: {
