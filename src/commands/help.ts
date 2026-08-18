@@ -118,7 +118,7 @@ export async function helpCommand(ctx: Context) {
 /broadcast - Send an announcement to all users
 📊 /dashboard - Owner dashboard
 ━━━━━━━━━━━━━━━━━━━━
-<b>🚀 COMING SOON</b>
+<b>🚀 🤖 AI Assistant — Online</b>
 
 🤖 AI Chat
 🌍 Translator
