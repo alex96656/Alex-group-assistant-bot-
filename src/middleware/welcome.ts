@@ -12,17 +12,54 @@ export async function welcomeMiddleware(
 
     if (settings.enabled) {
       for (const user of members) {
-        const text = settings.message
-          .replace("{first_name}", user.first_name)
-          .replace(
-            "{username}",
-            user.username ? "@" + user.username : user.first_name
-          )
-          .replace("{group_name}", ctx.chat.title || "this group");
+        const firstName = user.first_name || "New Member";
+        const username = user.username
+          ? `@${user.username}`
+          : "No username";
+        const groupName =
+          ctx.chat.type === "private"
+            ? "this group"
+            : ctx.chat.title || "this group";
 
-        await ctx.reply(text, {
-          parse_mode: "Markdown",
-        });
+        const text = `🎉 <b>NEW MEMBER!</b>
+
+👋 Welcome <b>${firstName}</b>!
+
+👤 Username: <b>${username}</b>
+👥 Group: <b>${groupName}</b>
+
+💫 We're happy to have you here!
+Enjoy the community, meet everyone and have fun. ❤️
+
+━━━━━━━━━━━━━━━━━━━━
+⚡ <b>Powered by Mr. Alex</b>`;
+
+        try {
+          const photos = await ctx.api.getUserProfilePhotos(user.id, {
+            limit: 1,
+          });
+
+          if (photos.total_count > 0) {
+            const photo = photos.photos[0];
+
+            const largestPhoto = photo[photo.length - 1];
+
+            await ctx.replyWithPhoto(largestPhoto.file_id, {
+              caption: text,
+              parse_mode: "HTML",
+            });
+          } else {
+            await ctx.reply(text, {
+              parse_mode: "HTML",
+            });
+          }
+        } catch (error) {
+          console.error("Welcome profile photo error:", error);
+
+          await ctx.reply(text, {
+            parse_mode: "HTML",
+          });
+        }
       }
     }
   }
