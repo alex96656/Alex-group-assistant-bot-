@@ -88,7 +88,7 @@ import { bioCommand } from "./commands/bio";
 import { setNickCommand } from "./commands/setnick";
 import { rankCommand } from "./commands/rank";
 import { begCommand } from "./commands/beg";
-
+import { goodbyeMiddleware } from "./middleware/goodbye";
 
 
 
@@ -179,7 +179,7 @@ bot.command("bio", bioCommand);
 bot.command("setnick", setNickCommand);
 bot.command("rank", rankCommand);
 bot.command("beg", begCommand);
-
+bot.use(goodbyeMiddleware);
 
 
 
