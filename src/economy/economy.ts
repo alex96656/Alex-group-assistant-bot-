@@ -15,23 +15,24 @@ export function getEconomy(userId: string) {
 
   if (!db.economy[userId]) {
     db.economy[userId] = {
-      balance: 500,
-      bank: 0,
-      xp: 0,
-      level: 1,
-      daily: 0,
-      bonus: 0,
-      rob: 0,
-      work: 0,
-      mine: 0,
-      fish: 0,
-      inventory: [],
-      items: [],
-      bio: "",
-      age: null,
-      nickname: "",
-      photo: ""
-    };
+  balance: 500,
+  bank: 0,
+  xp: 0,
+  level: 1,
+  daily: 0,
+  bonus: 0,
+  rob: 0,
+  work: 0,
+  mine: 0,
+  fish: 0,
+  inventory: [],
+  items: [],
+  pokemon: [],
+  bio: "",
+  age: null,
+  nickname: "",
+  photo: ""
+}
 
     saveDatabase(db);
   }

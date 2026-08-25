@@ -3,15 +3,30 @@ import { mainKeyboard } from "./keyboards";
 import { backKeyboard } from "./backKeyboard";
 import { helpKeyboard } from "./helpKeyboard";
 
+import { claimPokemonDrop } from "./economy/pokemonDrops";
+import { getPokemon } from "./services/pokemon";
+import {
+  getEconomy,
+  saveEconomy,
+} from "./economy/economy";
+
 export function registerCallbacks(bot: Bot) {
+
+  // ============================================
+  // 🏠 MAIN MENU
+  // ============================================
 
   bot.callbackQuery("main_menu", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🤖 <b>Welcome to Lexxie MiaBot</b>
+`╭━━━━━━━━━━━━━━━━━━━━╮
+      🤖 <b>LEXXIE MIABOT</b>
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-Choose an option below.`,
+✨ Welcome back!
+
+Choose an option below to explore Lexxie's features.`,
       {
         parse_mode: "HTML",
         reply_markup: mainKeyboard(),
@@ -19,40 +34,60 @@ Choose an option below.`,
     );
   });
 
+
+  // ============================================
+  // 🤖 BOT INFO
+  // ============================================
+
   bot.callbackQuery("botinfo", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🤖 <b>Lexxie MiaBot</b>
+`╭━━━━━━━━━━━━━━━━━━━━╮
+       🤖 <b>LEXXIE MIABOT</b>
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-📦 Version: 1.0.0
+📦 Version
+<b>1.0.0</b>
+
+⚡ Status
+🟢 <b>Online</b>
+
+🛠 Built with
+<b>TypeScript + Grammy</b>
 
 👑 Developer
 <a href="https://t.me/mr_alex_dem">@mr_alex_dem</a>
 
-⚡ Status
-Online
-
-🛠 Built with
-TypeScript
-Grammy Framework`,
+━━━━━━━━━━━━━━━━━━━━
+✨ <i>Smart • Fun • Powerful</i>`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
+
+  // ============================================
+  // 👑 OWNER
+  // ============================================
 
   bot.callbackQuery("owner", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`👑 <b>Owner Panel</b>
+`╭━━━━━━━━━━━━━━━━━━━━╮
+        👑 <b>OWNER</b>
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-Developer:
-<a href="https://t.me/mr_alex_dem">@mr_alex_dem</a>
+🤖 Lexxie MiaBot
 
-Thanks for using Lexxie MiaBot.`,
+Created & powered by
+
+👤 <a href="https://t.me/mr_alex_dem">@mr_alex_dem</a>
+
+💎 Thanks for using Lexxie!`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
@@ -60,75 +95,117 @@ Thanks for using Lexxie MiaBot.`,
     );
   });
 
+
+  // ============================================
+  // 📚 HELP
+  // ============================================
+
   bot.callbackQuery("help", async (ctx) => {
-  await ctx.answerCallbackQuery();
-
-  await ctx.editMessageText(
-`📚 <b>Lexxie MiaBot Help Center</b>
-
-Choose a category below.`,
-    {
-      parse_mode: "HTML",
-      reply_markup: helpKeyboard(),
-    }
-  );
-});
-
-  
-
-bot.callbackQuery("settings", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`⚙️ <b>Settings</b>
+`📚 <b>LEXXIE HELP CENTER</b>
 
-🚧 This feature is under development.
+Choose a category below.
 
-More settings will be available soon.`,
+🛡️ Moderation
+⚙️ Utilities
+🎮 Fun & Games
+🤖 AI
+👑 Owner
+ℹ️ About`,
+      {
+        parse_mode: "HTML",
+        reply_markup: helpKeyboard(),
+      }
+    );
+  });
+
+
+  // ============================================
+  // ⚙️ SETTINGS
+  // ============================================
+
+  bot.callbackQuery("settings", async (ctx) => {
+    await ctx.answerCallbackQuery();
+
+    await ctx.editMessageText(
+`⚙️ <b>SETTINGS</b>
+
+🚧 <b>Under Development</b>
+
+More customization options are coming soon.
+
+✨ Stay tuned for future updates.`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
+
+  // ============================================
+  // 🛠 TOOLS
+  // ============================================
 
   bot.callbackQuery("tools", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🛠 <b>Tools</b>
+`🛠 <b>LEXTOOLS</b>
 
 📊 Dashboard
 💾 Backup
 👥 Users
 📢 Broadcast
 
-More tools coming soon.`,
+━━━━━━━━━━━━━━━━━━━━
+🚧 More tools coming soon.`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
+
+  // ============================================
+  // 🚀 FEATURES
+  // ============================================
 
   bot.callbackQuery("features", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🚀 <b>Lexxie MiaBot Features</b>
+`🚀 <b>LEXXIE FEATURES</b>
 
-✅ Moderation
-✅ Dashboard
-✅ Backup
-✅ Notes
-✅ Welcome
+🛡️ Moderation
+✅ Welcome System
+✅ Goodbye System
 ✅ Anti-Link
-✅ Warn System
-✅ Profile
+✅ Warning System
 ✅ Admin Tools
 
-🤖 AI Features
-🚧 Coming Soon`,
+💰 Economy
+✅ Coins
+✅ Work
+✅ Mine
+✅ Fish
+✅ Rob
+✅ Shop
+
+🎮 Games
+✅ Slots
+✅ Dice
+✅ Coin Flip
+✅ Pokémon Drops
+
+🤖 AI
+✅ AI Chat
+
+━━━━━━━━━━━━━━━━━━━━
+⚡ <b>More features are coming.</b>`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
@@ -136,11 +213,16 @@ More tools coming soon.`,
     );
   });
 
-bot.callbackQuery("help_moderation", async (ctx) => {
+
+  // ============================================
+  // 🛡 MODERATION HELP
+  // ============================================
+
+  bot.callbackQuery("help_moderation", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🛡️ <b>Moderation Commands</b>
+`🛡️ <b>MODERATION</b>
 
 🚫 /ban
 👢 /kick
@@ -162,7 +244,7 @@ bot.callbackQuery("help_moderation", async (ctx) => {
 
 🚨 /report
 
-👋 Welcome System
+👋 Welcome / Goodbye
 🔗 Anti-Link`,
       {
         parse_mode: "HTML",
@@ -171,11 +253,16 @@ bot.callbackQuery("help_moderation", async (ctx) => {
     );
   });
 
+
+  // ============================================
+  // ⚙️ UTILITIES HELP
+  // ============================================
+
   bot.callbackQuery("help_utilities", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`⚙️ <b>Utility Commands</b>
+`⚙️ <b>UTILITIES</b>
 
 🏓 /ping
 🆔 /id
@@ -196,16 +283,31 @@ bot.callbackQuery("help_moderation", async (ctx) => {
     );
   });
 
+
+  // ============================================
+  // 🎮 FUN HELP
+  // ============================================
+
   bot.callbackQuery("help_fun", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🎉 <b>Fun Commands</b>
+`🎮 <b>LEXXIE GAMES</b>
 
-🎲 /dice
+🎰 /slots &lt;amount&gt;
 🪙 /coinflip
-💬 /quote
-📊 /poll`,
+🎲 /dice
+
+✨ Pokémon
+🎁 /drop
+
+💰 Earn Lex Coins
+⭐ Gain XP
+🏆 Level up
+📦 Collect Pokémon
+
+━━━━━━━━━━━━━━━━━━━━
+🎯 <i>More games coming soon.</i>`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
@@ -213,57 +315,80 @@ bot.callbackQuery("help_moderation", async (ctx) => {
     );
   });
 
+
+  // ============================================
+  // 🤖 AI HELP
+  // ============================================
+
   bot.callbackQuery("help_ai", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🤖 <b>AI Center</b>
-
-🚧 Coming Soon
+`🤖 <b>AI CENTER</b>
 
 💬 AI Chat
 🌍 Translator
 🖼️ Image Analysis
 🎨 Image Generator
 📄 OCR
-📝 Summarizer`,
+📝 Summarizer
+
+🚧 Some AI features are
+still under development.`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
+
+  // ============================================
+  // 👑 OWNER HELP
+  // ============================================
 
   bot.callbackQuery("help_owner", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`👑 <b>Owner Commands</b>
+`👑 <b>OWNER COMMANDS</b>
 
 📢 /broadcast
 📊 /dashboard
 💾 /backup
-👥 /users`,
+👥 /users
+
+━━━━━━━━━━━━━━━━━━━━
+🔐 <i>Owner-only controls</i>`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
+
+  // ============================================
+  // ℹ️ ABOUT
+  // ============================================
 
   bot.callbackQuery("help_about", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🤖 <b>Lexxie MiaBot</b>
+`╭━━━━━━━━━━━━━━━━━━━━╮
+       🤖 <b>LEXXIE MIABOT</b>
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-📦 Version: 1.0.0
+📦 Version: <b>1.0.0</b>
+
+⚡ Status: 🟢 <b>Online</b>
 
 👑 Developer
 <a href="https://t.me/mr_alex_dem">@mr_alex_dem</a>
 
-⚡ Status
-Online`,
+━━━━━━━━━━━━━━━━━━━━
+💎 <i>Built for fun and community.</i>`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
@@ -271,67 +396,86 @@ Online`,
     );
   });
 
-bot.callbackQuery("dash_stats", async (ctx) => {
+
+  // ============================================
+  // 📊 DASHBOARD
+  // ============================================
+
+  bot.callbackQuery("dash_stats", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`📊 <b>Dashboard Statistics</b>
+`📊 <b>DASHBOARD STATISTICS</b>
 
-🚧 Live statistics coming soon.`,
+🚧 Live statistics coming soon.
+
+━━━━━━━━━━━━━━━━━━━━
+🤖 Lexxie is running normally.`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
 
   bot.callbackQuery("dash_users", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`👥 <b>User Management</b>
+`👥 <b>USER MANAGEMENT</b>
 
-Use /users to view all bot users.`,
+Use:
+
+/users
+
+to view registered bot users.`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
 
   bot.callbackQuery("dash_backup", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`💾 <b>Backup</b>
+`💾 <b>DATABASE BACKUP</b>
 
-Use /backup to export your database.`,
+Use:
+
+/backup
+
+to create a database backup.`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
 
   bot.callbackQuery("dash_info", async (ctx) => {
     await ctx.answerCallbackQuery();
 
     await ctx.editMessageText(
-`🤖 <b>Lexxie MiaBot</b>
+`🤖 <b>LEXXIE MIABOT</b>
 
-📦 Version: 1.0.0
+📦 Version: <b>1.0.0</b>
 
-👑 Developer
-<a href="https://t.me/mr_alex_dem">@mr_alex_dem</a>
+🟢 Status: <b>Online</b>
 
-⚡ Status
-Online`,
+👑 Developer:
+<a href="https://t.me/mr_alex_dem">@mr_alex_dem</a>`,
       {
         parse_mode: "HTML",
         reply_markup: backKeyboard(),
       }
     );
   });
+
 
   bot.callbackQuery("dash_close", async (ctx) => {
     await ctx.answerCallbackQuery();
@@ -342,38 +486,193 @@ Online`,
   });
 
 
+  // ============================================
+  // 🎮 GAMES
+  // ============================================
 
-bot.callbackQuery("games", async (ctx) => {
-  await ctx.answerCallbackQuery();
+  bot.callbackQuery("games", async (ctx) => {
+    await ctx.answerCallbackQuery();
 
-  await ctx.editMessageText(
-`🎮 <b>Lexxie MiaBot Games</b>
+    await ctx.editMessageText(
+`╭━━━━━━━━━━━━━━━━━━━━╮
+        🎮 <b>LEXXIE GAMES</b>
+╰━━━━━━━━━━━━━━━━━━━━╯
 
-🎰 /slots <amount> - Slot Machine
-🪙 /coinflip <amount> - Coin Flip
-🎲 /dice - Roll Dice
-🃏 /blackjack <amount> - Blackjack (Coming Soon)
+🎰 <b>Casino</b>
+/slots &lt;amount&gt;
+/coinflip
+/dice
 
-💼 Economy
+🌟 <b>Pokémon</b>
+/drop
 
-💼 /work
-⛏ /mine
-🎣 /fish
-🥷 /rob
-🎁 /daily
-🎁 /bonus
+💰 <b>Economy</b>
+/work
+/mine
+/fish
+/rob
+/daily
+/bonus
 
-🛒 Shop
+🛒 <b>Shop</b>
+/shop
+/buy
+/inv
+/sell
 
-🛍 /shop
-💳 /buy
-🎒 /inv
-💸 /sell`,
-    {
-      parse_mode: "HTML",
-      reply_markup: backKeyboard(),
+━━━━━━━━━━━━━━━━━━━━
+⭐ Earn XP • Level Up • Collect`,
+      {
+        parse_mode: "HTML",
+        reply_markup: backKeyboard(),
+      }
+    );
+  });
+
+
+  // ============================================
+  // 🌟 POKÉMON CATCH SYSTEM
+  // ============================================
+
+  bot.callbackQuery(
+    /^pokemon_catch:(.+)$/,
+    async (ctx) => {
+
+      if (!ctx.from) return;
+
+      const dropId = ctx.match[1];
+
+      const result = claimPokemonDrop(
+        dropId,
+        ctx.from.id
+      );
+
+      // ----------------------------------------
+      // ❌ Failed catch
+      // ----------------------------------------
+
+      if (!result.success || !result.drop) {
+
+        await ctx.answerCallbackQuery({
+          text:
+            result.reason ||
+            "❌ You missed it!",
+          show_alert: true,
+        });
+
+        return;
+      }
+
+      try {
+
+        const pokemon = await getPokemon(
+          result.drop.pokemonId
+        );
+
+        const user = getEconomy(
+          ctx.from.id.toString()
+        );
+
+        // --------------------------------------
+        // 📦 Add Pokémon
+        // --------------------------------------
+
+        if (!user.pokemon) {
+          user.pokemon = [];
+        }
+
+        user.pokemon.push(pokemon.id);
+
+        // --------------------------------------
+        // 💰 Reward
+        // --------------------------------------
+
+        user.balance += result.drop.reward;
+
+        // --------------------------------------
+        // ⭐ XP
+        // --------------------------------------
+
+        user.xp += 50;
+
+        // --------------------------------------
+        // 🆙 Level system
+        // --------------------------------------
+
+        while (
+          user.xp >= user.level * 100
+        ) {
+          user.xp -= user.level * 100;
+          user.level += 1;
+        }
+
+        saveEconomy(
+          ctx.from.id.toString(),
+          user
+        );
+
+        // --------------------------------------
+        // 🎉 Success popup
+        // --------------------------------------
+
+        await ctx.answerCallbackQuery({
+          text:
+            `🎉 ${pokemon.name} caught!`,
+          show_alert: true,
+        });
+
+        // --------------------------------------
+        // 🏆 Update card
+        // --------------------------------------
+
+        await ctx.editMessageCaption({
+          caption:
+`╭━━━━━━━━━━━━━━━━━━━━╮
+      🏆 <b>POKÉMON CAUGHT!</b>
+╰━━━━━━━━━━━━━━━━━━━━╯
+
+⚡ <b>${pokemon.name.toUpperCase()}</b>
+
+👤 Trainer
+<b>${ctx.from.first_name}</b>
+
+━━━━━━━━━━━━━━━━━━━━
+
+💰 Reward
+<b>+${result.drop.reward.toLocaleString()} Lex Coins</b>
+
+⭐ XP
+<b>+50 XP</b>
+
+📦 Collection
+<b>Added successfully!</b>
+
+💳 Balance
+<b>${user.balance.toLocaleString()} Lex Coins</b>
+
+⭐ Level
+<b>${user.level}</b>
+
+━━━━━━━━━━━━━━━━━━━━
+⚡ <b>Powered by Mr. Alex</b>`,
+          parse_mode: "HTML",
+        });
+
+      } catch (error) {
+
+        console.error(
+          "Pokemon catch error:",
+          error
+        );
+
+        await ctx.answerCallbackQuery({
+          text:
+            "❌ Something went wrong while catching it.",
+          show_alert: true,
+        });
+
+      }
     }
   );
-});
 
 }

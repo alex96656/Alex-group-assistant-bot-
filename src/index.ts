@@ -89,10 +89,10 @@ import { setNickCommand } from "./commands/setnick";
 import { rankCommand } from "./commands/rank";
 import { begCommand } from "./commands/beg";
 import { goodbyeMiddleware } from "./middleware/goodbye";
-
-
-
-
+import { pokemonCommand } from "./commands/pokemon";
+import { dropCommand } from "./commands/drop";
+import { dropAllCommand } from "./commands/dropall";
+import { groupTracker } from "./middleware/groupTracker";
 
 
 
@@ -180,6 +180,15 @@ bot.command("setnick", setNickCommand);
 bot.command("rank", rankCommand);
 bot.command("beg", begCommand);
 bot.use(goodbyeMiddleware);
+bot.command("pokemon", pokemonCommand);
+bot.command("drop", dropCommand);
+bot.command("dropall", dropAllCommand);
+bot.use(groupTracker);
+bot.use(saveUser);
+
+
+
+
 
 
 
