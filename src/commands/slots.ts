@@ -1,6 +1,12 @@
 import { Context } from "grammy";
-import { getEconomy, saveEconomy } from "../economy/economy";
-import { sendGameCard } from "../cards/game";
+import {
+  getEconomy,
+  saveEconomy,
+} from "../economy/economy";
+
+import {
+  sendSlotsCard,
+} from "../cards/slots";
 
 const symbols = [
   "🍒",
@@ -11,10 +17,15 @@ const symbols = [
   "7️⃣",
 ];
 
-export async function slotsCommand(ctx: Context) {
+export async function slotsCommand(
+  ctx: Context
+) {
   if (!ctx.from) return;
 
-  const args = ctx.message?.text?.split(" ");
+  const args =
+    ctx.message?.text
+      ?.trim()
+      .split(/\s+/);
 
   if (!args || args.length < 2) {
     return ctx.reply(
@@ -24,30 +35,50 @@ export async function slotsCommand(ctx: Context) {
 
   const bet = Number(args[1]);
 
-  if (!Number.isFinite(bet) || bet <= 0) {
+  if (
+    !Number.isFinite(bet) ||
+    bet <= 0
+  ) {
     return ctx.reply(
       "❌ Enter a valid amount."
     );
   }
 
-  const user = getEconomy(
-    ctx.from.id.toString()
-  );
+  const userId =
+    String(ctx.from.id);
+
+  const user =
+    getEconomy(userId);
 
   if (user.balance < bet) {
     return ctx.reply(
-      "❌ You don't have enough Lex Coins."
+      `❌ Not enough Lex Coins.\n💰 Balance: ${user.balance.toLocaleString()}`
     );
   }
 
   const a =
-    symbols[Math.floor(Math.random() * symbols.length)];
+    symbols[
+      Math.floor(
+        Math.random() *
+          symbols.length
+      )
+    ];
 
   const b =
-    symbols[Math.floor(Math.random() * symbols.length)];
+    symbols[
+      Math.floor(
+        Math.random() *
+          symbols.length
+      )
+    ];
 
   const c =
-    symbols[Math.floor(Math.random() * symbols.length)];
+    symbols[
+      Math.floor(
+        Math.random() *
+          symbols.length
+      )
+    ];
 
   let reward = 0;
 
@@ -68,31 +99,16 @@ export async function slotsCommand(ctx: Context) {
   }
 
   saveEconomy(
-    ctx.from.id.toString(),
+    userId,
     user
   );
 
-  const result =
-    reward > 0
-      ? `🎉 <b>YOU WON!</b>
-
-💰 Reward: <b>+${reward.toLocaleString()} Lex Coins</b>`
-      : `💔 <b>YOU LOST!</b>
-
-💸 Lost: <b>${bet.toLocaleString()} Lex Coins</b>`;
-
-  await sendGameCard(ctx, {
-    title: "🎰 SLOT MACHINE",
-
-    content: `
-╔══════════════╗
-   ${a}  |  ${b}  |  ${c}
-╚══════════════╝
-`,
-
-    result: `${result}
-
-💳 New Balance:
-<b>${user.balance.toLocaleString()} Lex Coins</b>`,
+  await sendSlotsCard(ctx, {
+    a,
+    b,
+    c,
+    bet,
+    reward,
+    balance: user.balance,
   });
 }

@@ -1,20 +1,20 @@
 import { Context } from "grammy";
-import { sendGameCard } from "../cards/game";
+import {
+  sendCoinflipCard,
+} from "../cards/coinflip";
 
-export async function coinflipCommand(ctx: Context) {
-  const heads = Math.random() < 0.5;
+export async function coinflipCommand(
+  ctx: Context
+) {
+  const result =
+    Math.random() < 0.5
+      ? "HEADS"
+      : "TAILS";
 
-  const result = heads
-    ? "🪙 <b>HEADS!</b>"
-    : "🪙 <b>TAILS!</b>";
-
-  await sendGameCard(ctx, {
-    title: "🪙 COIN FLIP",
-    content: `
-🎲 The coin has been flipped!
-
-${result}
-`,
-    result: "✨ Good luck on your next flip!",
-  });
+  await sendCoinflipCard(
+    ctx,
+    {
+      result,
+    }
+  );
 }

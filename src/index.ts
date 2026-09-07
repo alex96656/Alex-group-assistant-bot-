@@ -93,7 +93,7 @@ import { pokemonCommand } from "./commands/pokemon";
 import { dropCommand } from "./commands/drop";
 import { dropAllCommand } from "./commands/dropall";
 import { groupTracker } from "./middleware/groupTracker";
-
+import { dropCommand } from "./commands/drop";
 
 
 
@@ -185,7 +185,7 @@ bot.command("drop", dropCommand);
 bot.command("dropall", dropAllCommand);
 bot.use(groupTracker);
 bot.use(saveUser);
-
+bot.command("drop", dropCommand);
 
 
 

@@ -1,56 +1,55 @@
-import fs from "fs";
-import path from "path";
+import {
+  getDatabase,
+  saveDatabase
+} from "../database/database";
 
-const NOTES_FILE = path.join(process.cwd(), "data", "notes.json");
+// ============================================
+// ADD NOTE
+// ============================================
 
-type NotesData = {
-  [userId: string]: {
-    [noteName: string]: string;
-  };
-};
+export function addNote(
+  userId: string,
+  name: string,
+  content: string
+) {
+  const db = getDatabase();
 
-function loadNotes(): NotesData {
-  if (!fs.existsSync(NOTES_FILE)) {
-    return {};
+  if (!db.notes) {
+    db.notes = {};
   }
 
-  const data = fs.readFileSync(NOTES_FILE, "utf-8");
-  return data ? JSON.parse(data) : {};
-}
-
-function saveNotes(data: NotesData) {
-  fs.writeFileSync(NOTES_FILE, JSON.stringify(data, null, 2));
-}
-
-export function addNote(userId: string, name: string, content: string) {
-  const notes = loadNotes();
-
-  if (!notes[userId]) {
-    notes[userId] = {};
+  if (!db.notes[userId]) {
+    db.notes[userId] = {};
   }
 
-  notes[userId][name] = content;
-  saveNotes(notes);
+  db.notes[userId][name] = content;
+
+  saveDatabase(db);
 }
 
-export function getNote(userId: string, name: string) {
-  const notes = loadNotes();
-  return notes[userId]?.[name];
+// ============================================
+// GET NOTE
+// ============================================
+
+export function getNote(
+  userId: string,
+  name: string
+): string | null {
+  const db = getDatabase();
+
+  return db.notes?.[userId]?.[name] ?? null;
 }
 
-export function listNotes(userId: string) {
-  const notes = loadNotes();
-  return Object.keys(notes[userId] || {});
-}
+// ============================================
+// LIST NOTES
+// ============================================
 
-export function deleteNote(userId: string, name: string) {
-  const notes = loadNotes();
+export function listNotes(
+  userId: string
+): string[] {
+  const db = getDatabase();
 
-  if (notes[userId] && notes[userId][name]) {
-    delete notes[userId][name];
-    saveNotes(notes);
-    return true;
-  }
-
-  return false;
+  return Object.keys(
+    db.notes?.[userId] ?? {}
+  );
 }

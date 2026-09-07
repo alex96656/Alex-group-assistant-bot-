@@ -1,62 +1,81 @@
-import { Context, InlineKeyboard } from "grammy";
-import { getRandomPokemon } from "../services/pokemon";
-import { createPokemonDrop } from "../economy/pokemonDrops";
+import { Context } from "grammy";
+import {
+  getPokemon
+} from "../services/pokemon";
 
-export async function dropCommand(ctx: Context) {
-  if (!ctx.chat) return;
+import {
+  sendPokemonCard
+} from "../cards/pokemon";
 
-  if (
-    ctx.chat.type !== "group" &&
-    ctx.chat.type !== "supergroup"
-  ) {
-    return ctx.reply(
-      "❌ Pokémon drops only work in groups."
+export async function dropCommand(
+  ctx: Context
+) {
+  const text =
+    ctx.message?.text || "";
+
+  const parts =
+    text.trim().split(/\s+/);
+
+  const query =
+    parts.slice(1).join(" ").trim();
+
+  if (!query) {
+    await ctx.reply(
+      "❌ <b>Pokemon name required</b>\n\n" +
+      "Example:\n" +
+      "<code>/drop pikachu</code>\n" +
+      "<code>/drop charizard</code>\n" +
+      "<code>/drop mewtwo</code>",
+      {
+        parse_mode: "HTML"
+      }
     );
+
+    return;
   }
 
   try {
-    const pokemon = await getRandomPokemon();
+    const pokemon =
+      await getPokemon(query);
 
-    const reward =
-      Math.floor(Math.random() * 901) + 100;
-
-    const drop = createPokemonDrop(
-      pokemon.id,
-      reward
+    await sendPokemonCard(
+      ctx,
+      pokemon
     );
 
-    const keyboard = new InlineKeyboard().text(
-      "🎯 CATCH POKÉMON",
-      `pokemon_catch:${drop.id}`
+  } catch (error: any) {
+    console.error(
+      "Drop command error:",
+      error
     );
-
-    await ctx.replyWithPhoto(pokemon.image, {
-      caption: `
-🌟 <b>WILD POKÉMON APPEARED!</b>
-
-⚡ <b>${pokemon.name.toUpperCase()}</b>
-
-🔥 Type:
-${pokemon.types.join(" • ")}
-
-💰 Reward:
-<b>${reward.toLocaleString()} Lex Coins</b>
-
-🎯 Be the first to catch it!
-
-⏳ You have 60 seconds.
-
-━━━━━━━━━━━━━━━━━━━━
-⚡ <b>Powered by Mr. Alex</b>
-`,
-      parse_mode: "HTML",
-      reply_markup: keyboard,
-    });
-  } catch (error) {
-    console.error("Pokemon drop error:", error);
 
     await ctx.reply(
-      "❌ Lexxie couldn't find a Pokémon right now."
+      `❌ <b>Pokemon not found</b>\n\n` +
+      `I couldn't find <code>${escapeHtml(
+        query
+      )}</code> in PokéAPI.\n\n` +
+      `Try a name like:\n` +
+      `• <code>pikachu</code>\n` +
+      `• <code>charizard</code>\n` +
+      `• <code>mewtwo</code>`,
+      {
+        parse_mode: "HTML"
+      }
     );
   }
+}
+
+function escapeHtml(
+  text: string
+) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    );
 }
